@@ -6,15 +6,17 @@ FROM alpine:edge
 
 ENV STRONGSWAN_RELEASE https://download.strongswan.org/strongswan.tar.bz2
 
-RUN apk --update add build-base \
-            ca-certificates \
-            curl \
-            curl-dev \
-            ip6tables \
-            iproute2 \
-            iptables-dev \
-            openssl \
-            openssl-dev && \
+RUN apk --update add --no-cache \
+        ip6tables \
+        iptables-dev \
+        iproute2 \
+        ca-certificates \
+        curl \
+        openssl && \
+    apk add --no-cache --virtual .build-deps \
+        build-base \
+        curl-dev \
+        openssl-dev && \
     mkdir -p /tmp/strongswan && \
     curl -Lo /tmp/strongswan.tar.bz2 $STRONGSWAN_RELEASE && \
     tar --strip-components=1 -C /tmp/strongswan -xjf /tmp/strongswan.tar.bz2 && \
@@ -56,8 +58,7 @@ RUN apk --update add build-base \
     make && \
     make install && \
     rm -rf /tmp/* && \
-    apk del build-base curl-dev openssl-dev && \
-    rm -rf /var/cache/apk/*
+    apk del .build-deps
 
 EXPOSE 500/udp \
        4500/udp
