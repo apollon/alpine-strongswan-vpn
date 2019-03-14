@@ -25,6 +25,7 @@ RUN apk --update add --no-cache \
             --sysconfdir=/etc \
             --libexecdir=/usr/lib \
             --with-ipsecdir=/usr/lib/strongswan \
+            --enable-kernel-libipsec \
             --enable-aesni \
             --enable-chapoly \
             --enable-cmd \
