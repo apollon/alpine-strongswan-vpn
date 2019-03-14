@@ -60,6 +60,11 @@ RUN apk --update add --no-cache \
     rm -rf /tmp/* && \
     apk del .build-deps
 
+# ENV TZ=Asia/Shanghai
+#   && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+# Change local zonetime(BeiJing)
+# RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime 
+
 EXPOSE 500/udp \
        4500/udp
 
