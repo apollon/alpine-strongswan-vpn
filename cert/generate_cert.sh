@@ -28,8 +28,7 @@ fi
 if [ ! -f $CONFIG_DIR/private/serverKey.pem ]; then
     echo "Generating Server certificate..."
 
-    USER=root
-    SERVER_CN=$USER@$CA_CN
+    SERVER_CN=root@$CA_CN
     SERVER_SAN=$CA_CN
 
     eval $IPSEC pki --gen --outform pem > $CONFIG_DIR/private/serverKey.pem

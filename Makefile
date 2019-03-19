@@ -1,6 +1,8 @@
-.PHONY: build export clean run stop
+.PHONY: all build export clean run stop
 
 CURR_DIR = $(shell pwd)
+
+all: build export
 
 build:
 	docker build --squash -t vpn .
